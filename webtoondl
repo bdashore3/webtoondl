@@ -23,7 +23,7 @@ const get = (url) => request.get(url).then((r) => cheerio.load(r.raw.toString())
   if (!titleNo)
     throw new Error('Please specifiy a comic ID with --comic');
 
-  const $ = await get(`http://www.webtoons.com/en/drama/NAME/list?title_no=${titleNo}&page=1`);
+  const $ = await get(`http://www.webtoons.com/en/challenge/NAME/list?title_no=${titleNo}&page=1`);
   const info = {
     genre: $('.info .genre').text(),
     name: $('.info .subj').text(),
@@ -49,7 +49,7 @@ const get = (url) => request.get(url).then((r) => cheerio.load(r.raw.toString())
       links: [],
     };
 
-    const $$ = await get(`http://www.webtoons.com/en/drama/N/E/viewer?title_no=${titleNo}&episode_no=${episode.id}`).catch((e) => {
+    const $$ = await get(`http://www.webtoons.com/en/challenge/N/E/viewer?title_no=${titleNo}&episode_no=${episode.id}`).catch((e) => {
       console.error(`\nError Indexing Episode ${episode.id}:`, e.message);
     });
     if ($$) {
