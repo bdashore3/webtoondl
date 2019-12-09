@@ -55,6 +55,10 @@ const get = (url) => request.get(url).then((r) => cheerio.load(r.raw.toString())
     if ($$) {
       const realname = $$('.subj_episode').text();
       episode.name = `${(i + 1).toString().padStart(3, 0)} - ${realname}`;
+      if (episode.name.indexOf('/' > -1 || '*' > -1 || '?' > -1 || '"' > -1 || '<' > -1 || '>' > -1 || '|' > -1 || '\\' > -1))
+      {
+        episode.name = episode.name.replace('/', ' ');
+      }
 
       const images = $$('#_imageList > img');
       episode.links.push(...Array.from(images).map((img, id) => ({
